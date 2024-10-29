@@ -26,7 +26,6 @@ class Token:
         STRING_LIT = object()
         MLIR_PIPELINE = object()
         COMMA = ","
-        DOT = "."
 
 
 _lexer_rules: list[tuple[re.Pattern[str], Token.Kind]] = [
@@ -41,7 +40,6 @@ _lexer_rules: list[tuple[re.Pattern[str], Token.Kind]] = [
     (re.compile(r"="), Token.Kind.EQUALS),
     (re.compile(r"\s+"), Token.Kind.SPACE),
     (re.compile(r","), Token.Kind.COMMA),
-    (re.compile(r"\."), Token.Kind.DOT),
 ]
 """
 This is a list of lexer rules that should be tried in this specific order to get the next token.
