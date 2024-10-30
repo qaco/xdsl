@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 from io import StringIO
 
@@ -24,6 +25,7 @@ class ApplyPDLPass(ModulePass):
         payload_module = op
         # Target the file containing the PDL specification
         if self.pdl_file:
+            assert os.path.exists(self.pdl_file)
             with open(self.pdl_file) as f:
                 pdl_module_str = f.read()
                 parser = Parser(ctx, pdl_module_str)
@@ -49,7 +51,7 @@ class ApplyPDLPass(ModulePass):
                             assert matcher.check_native_constraints(constraint_op)
                 # Apply the rewrites
                 elif isinstance(pdl_op, pdl.RewriteOp):
-                    # PDLRewriteFUnctions = the RHS pf the rewrite
+                    # PDLRewriteFUnctions = the RHS of the rewrite
                     functions = PDLRewriteFunctions(ctx)
                     assert isinstance(pdl_op.root, SSAValue)
                     payload_op = matcher.matching_context[pdl_op.root]
