@@ -1,4 +1,4 @@
-// RUN: xdsl-opt -p convert-vector-to-ptr,convert-memref-to-ptr{lower_func=true},convert-func-to-x86-func,convert-ptr-type-offsets,convert-vector-to-x86{arch=avx2},convert-ptr-to-x86{arch=avx2},reconcile-unrealized-casts,reconcile-unrealized-casts /home/hpompougnac/src/projects/xdsl/tests/filecheck/projects/libxsmm/vect_matmul_kernel.mlir
+// RUN: xdsl-opt -p convert-vector-to-ptr,convert-memref-to-ptr{lower_func=true},convert-ptr-type-offsets,canonicalize,convert-func-to-x86-func,convert-vector-to-x86{arch=avx2},convert-ptr-to-x86{arch=avx2},convert-arith-to-x86,reconcile-unrealized-casts /home/hpompougnac/src/projects/xdsl/tests/filecheck/projects/libxsmm/vect_matmul_kernel.mlir
 
 func.func @matmul(
   %A: memref<2x4xf64>,
